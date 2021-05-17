@@ -44,6 +44,11 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:0.6.2'
 
 
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+
+
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

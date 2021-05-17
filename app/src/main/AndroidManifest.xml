@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberClone">
-        <activity android:name=".Activities.Driver.MapDriverActivity"></activity>
+        <activity android:name=".Activities.Client.DetailRequestActivity" android:parentActivityName=".Activities.Client.MapClientActivity"></activity>
+        <activity android:name=".Activities.Driver.MapDriverActivity" />
         <activity android:name=".Activities.Client.MapClientActivity" />
         <activity
             android:name=".Activities.Driver.RegisterDriverActivity"
@@ -33,7 +34,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/google_maps_key"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

@@ -23,6 +23,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQueryEventListener;
@@ -98,6 +101,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
 
     private GoogleMap.OnCameraIdleListener  mCameraListener;
 
+    private Button mButtonRequestDriver;
 
 
     LocationCallback mLocationCallback = new LocationCallback() {
@@ -164,7 +168,31 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         instanceAutoCompleteDestination();
         onCameraMove();
 
+        mButtonRequestDriver = findViewById(R.id.btnRequestDriver);
+
+        mButtonRequestDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    requestDriver();
+            }
+        });
+
     }
+
+    private void requestDriver(){
+        if (mOriginLatLng != null && mDestinationLatLng !=null){
+            Intent intent = new Intent(MapClientActivity.this, DetailRequestActivity.class);
+            intent.putExtra("origin_lat", mOriginLatLng.latitude);
+            intent.putExtra("origin_lng", mOriginLatLng.longitude);
+            intent.putExtra("destination_lat", mDestinationLatLng.latitude);
+            intent.putExtra("destination_lng", mDestinationLatLng.longitude);
+            startActivity(intent);
+        }
+         else {
+            Toast.makeText(this, "Debe seleccionar al lugar de recogida y el destino ", Toast.LENGTH_SHORT).show();
+            }
+    }
+
     // metodo para buscar localizaciones de mi pais
     private void limitSearch(){
 

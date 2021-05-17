@@ -57,8 +57,17 @@
         android:layout_gravity="center"
         />
 
-
-
+    <Button
+        android:id="@+id/btnRequestDriver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Realizar Viaje"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/primary_dark"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
