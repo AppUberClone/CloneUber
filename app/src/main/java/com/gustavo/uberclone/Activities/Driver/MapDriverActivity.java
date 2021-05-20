@@ -43,6 +43,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.gustavo.uberclone.Activities.MainActivity;
 import com.gustavo.uberclone.Providers.AuthProvider;
 import com.gustavo.uberclone.Providers.GeofireProvider;
+import com.gustavo.uberclone.Providers.TokenProvider;
 import com.gustavo.uberclone.R;
 import com.gustavo.uberclone.includes.MyToolbar;
 
@@ -56,6 +57,8 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
 
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocation;
+
+    private TokenProvider mTokenProvider;
 
 
     private final static int LOCATION_REQUEST_CODE = 1;
@@ -109,6 +112,7 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
         MyToolbar.show(this, "Conductor", false);
         mAuthProvider = new AuthProvider();
         mGeofire = new GeofireProvider();
+        mTokenProvider = new TokenProvider();
 
 
         // Podemos iniciar o detener la ubicacion del cliente
@@ -132,6 +136,7 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
 
             }
         });
+        generateToken();
     }
 
     private void updateLocation(){
@@ -330,5 +335,8 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
         Intent intent = new Intent( MapDriverActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    void generateToken(){
+        mTokenProvider.create(mAuthProvider.getId());
     }
 }

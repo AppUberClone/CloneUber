@@ -2,9 +2,14 @@ package com.gustavo.uberclone.Activities.Client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,6 +45,8 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
     private Double mExtraOriginLng;
     private Double mExtraDestinationLat;
     private Double mExtraDestinationLng;
+    private  String mExtraOrigin;
+    private  String mExtraDestination;
 
     private LatLng mOriginLatLng;
     private LatLng mDestinationLatLng;
@@ -49,6 +56,13 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
     private List<LatLng> mPolylineList;
     private PolylineOptions mPolylineOptions;
 
+
+    private TextView mTextViewOrigin;
+    private  TextView mTextViewDestination;
+    private  TextView mTextViewTime;
+    private  TextView mTextViewDistance;
+
+    private Button mButtonRequest;
 
 
     @Override
@@ -61,16 +75,47 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
 
-        mExtraOriginLat = getIntent().getDoubleExtra("origin_lat", 0);
-        mExtraOriginLng = getIntent().getDoubleExtra("origin_lng", 0);
-        mExtraDestinationLat = getIntent().getDoubleExtra("destination_lat", 0);
-        mExtraDestinationLng = getIntent().getDoubleExtra("destination_lng", 0);
+        mExtraOriginLat =-17.339598304903827; /* getIntent().getDoubleExtra("origin_lat", 0); */
+        mExtraOriginLng =-63.252528235316284;  /*getIntent().getDoubleExtra("origin_lng", 0); */
+        mExtraDestinationLat =-17.3513322;  /*getIntent().getDoubleExtra("destination_lat", 0); */
+        mExtraDestinationLng =-63.2570403;  /*getIntent().getDoubleExtra("destination_lng", 0); */
+        /* mExtraOrigin =  getIntent().getStringExtra("origin"); */
+        /* mExtraDestination =  getIntent().getStringExtra("destination"); */
+
+
 
         mOriginLatLng = new LatLng(mExtraOriginLat, mExtraOriginLng);
         mDestinationLatLng = new LatLng(mExtraDestinationLat, mExtraDestinationLng);
 
         mGoogleApiProvider = new GoogleApiProvider(DetailRequestActivity.this);
 
+        mTextViewOrigin = findViewById(R.id.textViewOrigin);
+        mTextViewDestination = findViewById(R.id.textViewDestination);
+        mTextViewTime = findViewById(R.id.textViewTime);
+        mTextViewDistance = findViewById(R.id.textViewDistance);
+
+       /* mTextViewOrigin.setText(mExtraOrigin);
+        mTextViewDestination.setText(mExtraDestination); */
+
+        mButtonRequest = findViewById(R.id.btnRequestNow);
+
+        mButtonRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoRequestDiver();
+            }
+        });
+
+
+    }
+
+    private void gotoRequestDiver() {
+
+        Intent intent = new Intent(DetailRequestActivity.this, RequestDriverActivity.class);
+         intent.putExtra("origin_lat", mOriginLatLng.latitude);
+         intent.putExtra("origin_lng", mOriginLatLng.longitude);
+        startActivity(intent);
+        finish();
     }
 
     private  void  drawRoute(){
@@ -86,17 +131,27 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
                     String points = polylines.getString("points");
                     mPolylineList = DecodePoints.decodePoly(points);
                     mPolylineOptions = new PolylineOptions();
-                    mPolylineOptions.color(android.R.color.darker_gray);
-                    mPolylineOptions.width(8f);
+                    mPolylineOptions.color(ContextCompat.getColor(getApplicationContext(),R.color.black));
+                    mPolylineOptions.width(13f);
                     mPolylineOptions.startCap(new SquareCap());
                     mPolylineOptions.jointType(JointType.ROUND);
                     mPolylineOptions.addAll(mPolylineList);
                     mMap.addPolyline(mPolylineOptions);
 
+                    JSONArray  legs = route.getJSONArray( "legs");
+                    JSONObject leg = legs.getJSONObject(0);
+                    JSONObject distance = leg.getJSONObject("distance");
+                    JSONObject duration = leg.getJSONObject("duration");
+                    String distanceText = distance.getString("text");
+                    String  durationText = duration.getString("text");
+                    mTextViewTime.setText(durationText);
+                    mTextViewDistance.setText(distanceText);
+
+
 
 
                 } catch (Exception e){
-                    Log.d( "Error", "Error encontrado" + e.getMessage());
+                    Log.d( "Error", "Error encontrado: " + e.getMessage());
                   }
             }
 

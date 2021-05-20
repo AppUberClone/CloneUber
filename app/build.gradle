@@ -43,13 +43,18 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation 'com.google.maps.android:android-maps-utils:0.6.2'
 
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+
 
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 
+    implementation 'com.airbnb.android:lottie:2.8.0'
+
 
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation 'com.google.firebase:firebase-firestore:22.1.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

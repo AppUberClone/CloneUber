@@ -55,6 +55,7 @@ import com.google.maps.android.SphericalUtil;
 import com.gustavo.uberclone.Activities.MainActivity;
 import com.gustavo.uberclone.Providers.AuthProvider;
 import com.gustavo.uberclone.Providers.GeofireProvider;
+import com.gustavo.uberclone.Providers.TokenProvider;
 import com.gustavo.uberclone.R;
 import com.gustavo.uberclone.includes.MyToolbar;
 
@@ -68,12 +69,15 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     AuthProvider mAuthProvider;
     GeofireProvider mGeofireProvider;
 
+
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
 
 
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocation;
+
+    private TokenProvider mTokenProvider;
 
     private final static int LOCATION_REQUEST_CODE = 1;
     private final static int SETTINGS_REQUEST_CODE = 2;
@@ -152,6 +156,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         MyToolbar.show(this, "Cliente", false);
         mAuthProvider = new AuthProvider();
         mGeofireProvider = new GeofireProvider();
+        mTokenProvider = new TokenProvider();
 
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
@@ -177,20 +182,24 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
+        generateToken();
+
     }
 
     private void requestDriver(){
-        if (mOriginLatLng != null && mDestinationLatLng !=null){
+      /*  if (mOriginLatLng != null && mDestinationLatLng !=null){ */
             Intent intent = new Intent(MapClientActivity.this, DetailRequestActivity.class);
-            intent.putExtra("origin_lat", mOriginLatLng.latitude);
+         /*   intent.putExtra("origin_lat", mOriginLatLng.latitude);
             intent.putExtra("origin_lng", mOriginLatLng.longitude);
             intent.putExtra("destination_lat", mDestinationLatLng.latitude);
             intent.putExtra("destination_lng", mDestinationLatLng.longitude);
+            intent.putExtra("origin", mOrigin);
+            intent.putExtra("destination", mDestination);*/
             startActivity(intent);
-        }
+      /*  }
          else {
             Toast.makeText(this, "Debe seleccionar al lugar de recogida y el destino ", Toast.LENGTH_SHORT).show();
-            }
+            } */
     }
 
     // metodo para buscar localizaciones de mi pais
@@ -220,7 +229,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
                     mOrigin = address + " " + city;
                     mAutoComplete.setText(address + " " + city);
                 } catch (Exception e ){
-                    Log.d("Error", "message " +e.getMessage());
+                    Log.d("Error", "message: " +e.getMessage());
                 }
             }
         };
@@ -274,7 +283,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void getActiveDrivers() {
-        mGeofireProvider.getActiveDrivers(mCurrentLatLng).addGeoQueryEventListener(new GeoQueryEventListener() {
+        mGeofireProvider.getActiveDrivers(mCurrentLatLng,10).addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 // AÑADIREMOS LOS MARCADORES DE LOS CONDUCTORES QUE SE CONECTEN EN LA APLICACION
@@ -489,5 +498,8 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         Intent intent = new Intent( MapClientActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    void  generateToken(){
+            mTokenProvider.create(mAuthProvider.getId());
     }
 }

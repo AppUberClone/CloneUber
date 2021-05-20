@@ -12,7 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberClone">
-        <activity android:name=".Activities.Client.DetailRequestActivity" android:parentActivityName=".Activities.Client.MapClientActivity"></activity>
+        <service android:name=".services.MyFirebaseMessagingClient">
+
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+
+        <activity android:name=".Activities.Client.RequestDriverActivity"></activity>
+        <activity
+            android:name=".Activities.Client.DetailRequestActivity"
+            android:parentActivityName=".Activities.Client.MapClientActivity" />
         <activity android:name=".Activities.Driver.MapDriverActivity" />
         <activity android:name=".Activities.Client.MapClientActivity" />
         <activity
