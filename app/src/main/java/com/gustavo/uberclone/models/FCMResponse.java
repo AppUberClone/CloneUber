@@ -3,13 +3,13 @@ package com.gustavo.uberclone.models;
 import java.util.ArrayList;
 
 public class FCMResponse{
-    private float multicast_id;
+    private long multicast_id;
     private int success;
     private int failure;
     private int canonical_ids;
     ArrayList<Object> results = new ArrayList<Object>();
 
-    public FCMResponse(float multicast_id, int success, int failure, int canonical_ids, ArrayList<Object> results) {
+    public FCMResponse(long multicast_id, int success, int failure, int canonical_ids, ArrayList<Object> results) {
         this.multicast_id = multicast_id;
         this.success = success;
         this.failure = failure;
@@ -17,11 +17,11 @@ public class FCMResponse{
         this.results = results;
     }
 
-    public float getMulticast_id() {
+    public long getMulticast_id() {
         return multicast_id;
     }
 
-    public void setMulticast_id(float multicast_id) {
+    public void setMulticast_id(long multicast_id) {
         this.multicast_id = multicast_id;
     }
 

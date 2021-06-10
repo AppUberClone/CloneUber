@@ -79,8 +79,8 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         mExtraOriginLng =-63.252528235316284;  /*getIntent().getDoubleExtra("origin_lng", 0); */
         mExtraDestinationLat =-17.3513322;  /*getIntent().getDoubleExtra("destination_lat", 0); */
         mExtraDestinationLng =-63.2570403;  /*getIntent().getDoubleExtra("destination_lng", 0); */
-        /* mExtraOrigin =  getIntent().getStringExtra("origin"); */
-        /* mExtraDestination =  getIntent().getStringExtra("destination"); */
+         mExtraOrigin ="origin";   /*getIntent().getStringExtra("origin");  */
+         mExtraDestination ="destination";   /*getIntent().getStringExtra("destination"); */
 
 
 
@@ -114,6 +114,10 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         Intent intent = new Intent(DetailRequestActivity.this, RequestDriverActivity.class);
          intent.putExtra("origin_lat", mOriginLatLng.latitude);
          intent.putExtra("origin_lng", mOriginLatLng.longitude);
+         intent.putExtra("origin", mExtraOrigin);
+         intent.putExtra("destination", mExtraDestination);
+         intent.putExtra("destination_lat", mDestinationLatLng.latitude);
+         intent.putExtra("destination_lng", mDestinationLatLng.longitude);
         startActivity(intent);
         finish();
     }

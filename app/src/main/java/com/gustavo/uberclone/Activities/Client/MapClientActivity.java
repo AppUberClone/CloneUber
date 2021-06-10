@@ -155,7 +155,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
 
         MyToolbar.show(this, "Cliente", false);
         mAuthProvider = new AuthProvider();
-        mGeofireProvider = new GeofireProvider();
+        mGeofireProvider = new GeofireProvider("active_drivers");
         mTokenProvider = new TokenProvider();
 
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
@@ -482,7 +482,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.driver_menu, menu);
+        getMenuInflater().inflate(R.menu.client_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

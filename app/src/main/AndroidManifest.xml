@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -12,15 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberClone">
-        <service android:name=".services.MyFirebaseMessagingClient">
+        <activity android:name=".Activities.Client.UpdateProfileActivity" android:parentActivityName=".Activities.Client.MapClientActivity"></activity>
+        <activity android:name=".Activities.Driver.NotificationBookingActivity" />
+        <activity android:name=".Activities.Client.CalificationDriverActivity" />
+        <activity android:name=".Activities.Driver.CalificationClientActivity" />
+        <activity android:name=".Activities.Driver.MapDriverBookingActivity" />
+        <activity android:name=".Activities.Client.MapClientBookingActivity" />
 
+        <receiver
+            android:name=".receivers.AcceptReceiver"
+            android:enabled="true" />
+        <receiver
+            android:name=".receivers.CancelReceiver"
+            android:enabled="true" />
+
+        <service android:name=".services.MyFirebaseMessagingClient">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-
-        <activity android:name=".Activities.Client.RequestDriverActivity"></activity>
+        <activity android:name=".Activities.Client.RequestDriverActivity" />
         <activity
             android:name=".Activities.Client.DetailRequestActivity"
             android:parentActivityName=".Activities.Client.MapClientActivity" />

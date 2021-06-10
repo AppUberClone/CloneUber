@@ -58,7 +58,9 @@ public class NotificationHelper extends ContextWrapper {
                 .setAutoCancel(true)
                 .setSound(soundUri)
                 .setContentIntent(intent)
-                .setSmallIcon(R.drawable.icon_car);
+                .setSmallIcon(R.drawable.icon_car)
+                .setStyle(new Notification.BigTextStyle().bigText(body).setBigContentTitle(tittle));
+
     }
 
     public NotificationCompat.Builder getNotificationOldApi(String tittle, String body, PendingIntent intent, Uri soundUri){
@@ -68,8 +70,32 @@ public class NotificationHelper extends ContextWrapper {
                 .setAutoCancel(true)
                 .setSound(soundUri)
                 .setContentIntent(intent)
-                .setSmallIcon(R.drawable.icon_car);
+                .setSmallIcon(R.drawable.icon_car)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body).setBigContentTitle(tittle));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public Notification.Builder getNotificationActions(String tittle, String body,  Uri soundUri, Notification.Action acceptAction, Notification.Action cancelAction){
+        return new Notification.Builder(getApplicationContext(), CHANNEL_ID)
+                .setContentTitle(tittle)
+                .setContentText(body)
+                .setAutoCancel(true)
+                .setSound(soundUri)
+                .setSmallIcon(R.drawable.icon_car)
+                .addAction(acceptAction)
+                .addAction(cancelAction)
+                .setStyle(new Notification.BigTextStyle().bigText(body).setBigContentTitle(tittle));
+    }
+    public NotificationCompat.Builder getNotificationOldApiActions(String tittle, String body,  Uri soundUri, NotificationCompat.Action acceptAction, NotificationCompat.Action cancelAction){
+        return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                .setContentTitle(tittle)
+                .setContentText(body)
+                .setAutoCancel(true)
+                .setSound(soundUri)
+                .setSmallIcon(R.drawable.icon_car)
+                .addAction(acceptAction)
+                .addAction(cancelAction)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body).setBigContentTitle(tittle));
+    }
 
 }
