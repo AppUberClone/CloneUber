@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -41,6 +42,7 @@ import com.gustavo.uberclone.Providers.GoogleApiProvider;
 import com.gustavo.uberclone.Providers.TokenProvider;
 import com.gustavo.uberclone.R;
 import com.gustavo.uberclone.utils.DecodePoints;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -90,6 +92,7 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
     private TextView mTextViewOriginBooking;
     private TextView mTextViewDestinationBooking;
     private TextView mTextViewStatusBooking;
+    private ImageView mImageViewBooking;
 
 
     private GoogleApiProvider mGoogleApiProvider;
@@ -116,6 +119,7 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
         mClientProvider = new ClientProvider();
         mClientBookingProvider = new ClientBookingProvider();
         mDriverProvider = new DriverProvider();
+        mImageViewBooking = findViewById(R.id.imageViewClientBooking);
 
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -226,6 +230,12 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
                  if (snapshot.exists()){
                      String name = snapshot.child("name").getValue().toString();
                      String email = snapshot.child("email").getValue().toString();
+                     String image = "";
+
+                     if (snapshot.hasChild("image")){
+                         image = snapshot.child("image").getValue().toString();
+                         Picasso.with(MapClientBookingActivity.this).load(image).into(mImageViewBooking);
+                     }
 
                      mTextviewDriverBooking.setText(name);
                      mTextViewEmailDriverBooking.setText(email);

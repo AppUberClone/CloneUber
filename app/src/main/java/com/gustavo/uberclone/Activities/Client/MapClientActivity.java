@@ -491,6 +491,10 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         if (item.getItemId() == R.id.action_logout){
             logout();
         }
+        if (item.getItemId() == R.id.action_update){
+            Intent intent = new Intent(MapClientActivity.this, UpdateProfileActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
     void logout(){

@@ -21,6 +21,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ import com.gustavo.uberclone.models.ClientBooking;
 import com.gustavo.uberclone.models.FCMBody;
 import com.gustavo.uberclone.models.FCMResponse;
 import com.gustavo.uberclone.utils.DecodePoints;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -97,6 +99,8 @@ public class MapDriverBookingActivity extends AppCompatActivity implements OnMap
     private PolylineOptions mPolylineOptions;
 
     private TokenProvider mTokenProvider;
+
+    private ImageView mImageViewBooking;
 
     private boolean mIsFirstTime = true;
     private boolean mIsCloseToClient = false;
@@ -178,6 +182,7 @@ public class MapDriverBookingActivity extends AppCompatActivity implements OnMap
         mTextViewDestinationBooking = findViewById(R.id.textViewDestinationBooking);
         mButtonStartBooking = findViewById(R.id.btnStartBooking);
         mButtonFinishBooking = findViewById(R.id.btnFinishBooking);
+        mImageViewBooking = findViewById(R.id.imageViewClientBooking);
 
 
         mExtraClientId = getIntent().getStringExtra("idClient");
@@ -284,6 +289,11 @@ public class MapDriverBookingActivity extends AppCompatActivity implements OnMap
                  if (snapshot.exists()){
                      String name = snapshot.child("name").getValue().toString();
                      String email = snapshot.child("email").getValue().toString();
+                     String image = "";
+                     if (snapshot.hasChild("image")){
+                         image = snapshot.child("image").getValue().toString();
+                         Picasso.with(MapDriverBookingActivity.this).load(image).into(mImageViewBooking);
+                     }
                      mTextviewClientBooking.setText(name);
                      mTextViewEmailClientBooking.setText(email);
                  }

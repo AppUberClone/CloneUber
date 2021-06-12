@@ -43,6 +43,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.gustavo.uberclone.Activities.Client.MapClientActivity;
+import com.gustavo.uberclone.Activities.Client.UpdateProfileActivity;
 import com.gustavo.uberclone.Activities.MainActivity;
 import com.gustavo.uberclone.Providers.AuthProvider;
 import com.gustavo.uberclone.Providers.GeofireProvider;
@@ -145,13 +147,13 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
         isDriversWorking();
     }
 
-    @Override
+    /*@Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mListener !=null){
+        if (mListener != null) {
             mGeofire.isDriversWorking(mAuthProvider.getId()).removeEventListener(mListener);
         }
-    }
+    } */
 
     private void isDriversWorking() {
         mListener= mGeofire.isDriversWorking(mAuthProvider.getId()).addValueEventListener(new ValueEventListener() {
@@ -355,6 +357,10 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_logout){
             logout();
+        }
+        if (item.getItemId() == R.id.action_update){
+            Intent intent = new Intent(MapDriverActivity.this, UpdateProfileDriverActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

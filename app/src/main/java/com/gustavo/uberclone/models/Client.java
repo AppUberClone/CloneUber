@@ -5,11 +5,23 @@ public class Client {
     String id;
     String name;
     String email;
+    String image;
+
+    public  Client(){
+
+    }
 
     public Client(String id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public Client(String id, String name, String email, String image) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.image = image;
     }
 
     public String getId() {
@@ -34,5 +46,13 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
