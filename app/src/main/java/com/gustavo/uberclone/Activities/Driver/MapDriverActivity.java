@@ -362,6 +362,10 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
             Intent intent = new Intent(MapDriverActivity.this, UpdateProfileDriverActivity.class);
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.action_history){
+            Intent intent = new Intent(MapDriverActivity.this, HistoryBookingDriverActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -14,7 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberClone">
-        <activity android:name=".Activities.Driver.UpdateProfileDriverActivity" android:parentActivityName=".Activities.Driver.MapDriverActivity"></activity>
+        <activity android:name=".Activities.Driver.HistoryBookingDetailDriverActivity"></activity>
+        <activity android:name=".Activities.Client.HistoryBookingDetailClientActivity" />
+        <activity
+            android:name=".Activities.Driver.HistoryBookingDriverActivity"
+            android:parentActivityName=".Activities.Driver.MapDriverActivity" />
+        <activity
+            android:name=".Activities.Client.HistoryBookingClientActivity"
+            android:parentActivityName=".Activities.Client.MapClientActivity" />
+        <activity
+            android:name=".Activities.Driver.UpdateProfileDriverActivity"
+            android:parentActivityName=".Activities.Driver.MapDriverActivity" />
         <activity
             android:name=".Activities.Client.UpdateProfileActivity"
             android:parentActivityName=".Activities.Client.MapClientActivity" />
