@@ -12,24 +12,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <io.github.florent37.shapeofview.shapes.ArcView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="VIAJE FINALIZADO"
-            android:textAlignment="center"
-            android:textSize="22sp"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="20dp"/>
+            android:layout_height="230dp"
+            android:elevation="4dp"
+            app:shape_arc_height="20dp"
+            app:shape_arc_position="bottom">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:lottie_imageAssetsFolder="assets"
-            app:lottie_fileName="782-check-mark-success.json"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_dark">
+            </View>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VIAJE FINALIZADO"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_imageAssetsFolder="assets"
+                app:lottie_fileName="782-check-mark-success.json"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"/>
+
+        </io.github.florent37.shapeofview.shapes.ArcView>
 
         <TextView
             android:layout_width="match_parent"

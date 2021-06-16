@@ -23,6 +23,7 @@ import com.gustavo.uberclone.Activities.Driver.MapDriverActivity;
 import com.gustavo.uberclone.R;
 import com.gustavo.uberclone.includes.MyToolbar;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText mTextInputEmail;
     TextInputEditText mTextInputPassword;
     Button mButtonLogin;
+    CircleImageView mCircleImageBack;
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -48,12 +50,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-      MyToolbar.show(this,"Login", true);
+      //MyToolbar.show(this,"Login", true);
 
 
         mTextInputEmail = findViewById(R.id.textInputEmail);
         mTextInputPassword =findViewById(R.id.textInputPassword);
         mButtonLogin = findViewById(R.id.btnLogin);
+        mCircleImageBack = findViewById(R.id.circleImageBackHistoryBooking);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -65,6 +68,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                  login();
+            }
+        });
+
+        mCircleImageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

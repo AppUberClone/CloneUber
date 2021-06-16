@@ -7,7 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context=".Activities.LoginActivity">
 
-    <include layout="@layout/action_bar_toollbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,18 +14,37 @@
         android:background="@color/primary"
         android:orientation="vertical"
         android:padding="10dp">
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="25dp"
-            android:layout_gravity="center"
-            android:src="@drawable/icon_uber_clone"
-            />
+
+        <io.github.florent37.shapeofview.shapes.ArcView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:elevation="4dp"
+            app:shape_arc_height="20dp"
+            app:shape_arc_position="bottom">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_dark">
+            </View>
+
+            <TextView
+                android:id="@+id/textViewNameHistoryBooking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UBER CLONE"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_margin="30dp"/>
+
+        </io.github.florent37.shapeofview.shapes.ArcView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -92,17 +110,28 @@
 
         </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="center|top"
+        android:src="@drawable/icon_uber_clone"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageBackHistoryBooking"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_back"
+        android:layout_gravity="left|top"
+        app:civ_border_width="5dp"
+        app:civ_border_color="#f0f0f0"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+
 
 
 

@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
+import com.google.android.material.circularreveal.CircularRevealWidget;
 import com.gustavo.uberclone.Providers.GoogleApiProvider;
 import com.gustavo.uberclone.R;
 import com.gustavo.uberclone.includes.MyToolbar;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,6 +63,7 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
     private  TextView mTextViewDestination;
     private  TextView mTextViewTime;
     private  TextView mTextViewDistance;
+    private CircleImageView mCircleImageBack;
 
     private Button mButtonRequest;
 
@@ -70,7 +73,7 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_request);
 
-        MyToolbar.show(this, "TUS DATOS", true);
+       // MyToolbar.show(this, "TUS DATOS", true);
 
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
@@ -98,11 +101,19 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         mTextViewDestination.setText(mExtraDestination); */
 
         mButtonRequest = findViewById(R.id.btnRequestNow);
+        mCircleImageBack = findViewById(R.id.circleImageBackHistoryBooking);
 
         mButtonRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoRequestDiver();
+            }
+        });
+
+        mCircleImageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

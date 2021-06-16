@@ -36,6 +36,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UpdateProfileDriverActivity extends AppCompatActivity {
 
     private ImageView mImageViewProfile;
@@ -43,6 +45,7 @@ public class UpdateProfileDriverActivity extends AppCompatActivity {
     private TextView mTextViewVehicleBrand;
     private TextView mTExtViewVehiclePlate;
     private Button  mButtonUpdate;
+    private CircleImageView mCircleImageBack;
 
     private DriverProvider mDriverProvider;
     private AuthProvider mAuthProvider;
@@ -64,12 +67,13 @@ public class UpdateProfileDriverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile_driver);
 
-        MyToolbar.show(this, "Actualizar perfil", true);
+        //MyToolbar.show(this, "Actualizar perfil", true);
         mImageViewProfile = findViewById(R.id.imageViewProfile);
         mTextViewName = findViewById(R.id.textInputName);
         mTextViewVehicleBrand = findViewById(R.id.textInputBrand);
         mTExtViewVehiclePlate = findViewById(R.id.textInputPlate);
         mButtonUpdate = findViewById(R.id.btnUpdateProfile);
+        mCircleImageBack = findViewById(R.id.circleImageBackHistoryBooking);
 
         mDriverProvider = new DriverProvider();
         mAuthProvider = new AuthProvider();
@@ -89,6 +93,13 @@ public class UpdateProfileDriverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openGallery();
+            }
+        });
+
+        mCircleImageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
